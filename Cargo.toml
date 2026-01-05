@@ -1,0 +1,22 @@
+[package]
+name = "emotion-ai-agent-system"
+version = "0.1.0"
+edition = "2025"
+description = "A high-performance Rust API for analyzing user interactions in role-playing games using Grok AI"
+license = "MIT"
+homepage = "https://github.com/sethyu1/emotion-ai-agent-system"
+repository = "https://github.com/sethyu1/emotion-ai-agent-system"
+keywords = ["ai", "emotion", "nlp", "gaming", "rust"]
+categories = ["api-bindings", "games"]
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.12", features = ["json"] }
+tower-http = { version = "0.5", features = ["cors"] }
+anyhow = "1.0"
+rand = "0.8"
+chrono = { version = "0.4", features = ["serde"] }
+dotenvy = "0.15"

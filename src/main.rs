@@ -47,8 +47,8 @@ async fn main() {
         .with_state(AppState { api_key });
 
     // Run the server
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:9527").await.unwrap();
-    println!("Server running on http://127.0.0.1:9527");
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:9527").await.unwrap();
+    println!("Server running on http://0.0.0.0:9527");
     axum::serve(listener, app).await.unwrap();
 }
 

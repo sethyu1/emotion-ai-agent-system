@@ -1,7 +1,7 @@
 [package]
 name = "emotion-ai-agent-system"
 version = "0.1.0"
-edition = "2025"
+edition = "2021"
 description = "A high-performance Rust API for analyzing user interactions in role-playing games using Grok AI"
 license = "MIT"
 homepage = "https://github.com/sethyu1/emotion-ai-agent-system"

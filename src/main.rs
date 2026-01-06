@@ -69,6 +69,9 @@ async fn analyze_emotion(
     axum::extract::State(state): axum::extract::State<AppState>,
     Json(payload): Json<EmotionRequest>,
 ) -> Result<Json<EmotionResponse>, StatusCode> {
+    println!("\n{}", "=".repeat(80));
+    println!("🎯 NEW EMOTION ANALYSIS REQUEST");
+    println!("{}", "=".repeat(80));
 
     // Convert emotion and relationship i32 values to category names for Grok
     let emotion_str = ranges::get_emotion_from_value(payload.current_emotion)
@@ -123,12 +126,18 @@ async fn analyze_emotion(
         .trim();
 
     // Debug: Log Grok's response
+    println!("\n{}", "-".repeat(60));
+    println!("🤖 AI RESPONSE RECEIVED");
+    println!("{}", "-".repeat(60));
     println!("🤖 Grok Response: '{}'", grok_response);
 
     // Parse the behavior category from Grok's response
     let behavior_category = parse_behavior_from_response(grok_response);
 
     // Debug: Log parsed behavior category
+    println!("\n{}", "-".repeat(60));
+    println!("🎭 BEHAVIOR ANALYSIS");
+    println!("{}", "-".repeat(60));
     println!("🎭 Parsed Behavior: '{}'", behavior_category);
 
     // Calculate emotion and relationship changes based on behavior category and current state
@@ -137,6 +146,13 @@ async fn analyze_emotion(
         payload.current_emotion,
         payload.current_relationship
     );
+
+    println!("\n{}", "=".repeat(60));
+    println!("📊 FINAL RESULTS");
+    println!("{}", "=".repeat(60));
+    println!("📈 Emotion Change: {}", emotion_change);
+    println!("💝 Relationship Change: {}", relationship_change);
+    println!("{}", "=".repeat(80));
 
     Ok(Json(EmotionResponse {
         emotion_change,
@@ -168,6 +184,7 @@ fn calculate_changes(behavior_category: &str, current_emotion: i32, current_rela
 
     // Debug: Log the random value generated
     println!("🎲 Random value: {:.2} (range: [{}, {}])", random_value, behavior_range.0, behavior_range.1);
+    println!();
 
     // Convert current emotion and relationship values to their corresponding names
     let emotion_name = ranges::get_emotion_from_value(current_emotion)
@@ -207,6 +224,7 @@ fn calculate_changes(behavior_category: &str, current_emotion: i32, current_rela
              emotion_name, emotion_coeff.positive_multiplier, emotion_coeff.negative_multiplier);
     println!("🤝 Relationship: '{}' -> Coeff: ({:.2}, {:.2})",
              relationship_name, relationship_coeff.positive_multiplier, relationship_coeff.negative_multiplier);
+    println!();
 
     // Get the appropriate multipliers based on behavior classification
     let emotion_multiplier = emotion_coeff.get_multiplier(is_positive_behavior);
